@@ -9,6 +9,17 @@ function App() {
         {id: "1002", name: "TypeScript"},
         {id: "1003", name: "JavaScript"},
     ]
+    const selectNum = 1
+    function printSelectedNumber(num){
+        switch (num){
+            case 1: return <h3>1</h3>
+            case 2: return <h3>2</h3>
+            case 3: return <h3>3</h3>
+        }
+    }
+    const giveMePi = (pi) => {
+        console.log("I Got Pi!")
+    }
   return (
     <div className="App">
         {/*在JSX中使用{}来包裹想要执行的js表达式*/}
@@ -38,6 +49,17 @@ function App() {
         {false && <h1>Hiiiiii</h1>}
         {true ? <h2>Hello</h2>:<h2>Ciallo</h2>}
         {false ? <h2>Hello</h2>:<h2>Ciallo</h2>}
+        {/*对于复杂的条件渲染，可以使用函数来进行渲染，如：*/}
+        {printSelectedNumber(selectNum)}
+        {/*React中，绑定事件遵循on+事件名称+{调用函数}的方法*/}
+        <button onClick={() => {console.log("按钮被点击了")}}>点我</button>
+        {/*获取事件参数只需要在函数形参声明参数即可*/}
+        <button onClick={(e) => {
+            console.log(e)
+        }}>点我点我</button>
+        {/*需要传递自定义参数的时候，事件绑定的位置改造成箭头函数的写法*/}
+        {/*不能直接调用函数，要用箭头函数的写法*/}
+        <button onClick={() => {giveMePi(pi)}}>Give me Pi</button>
     </div>
   )
 }
