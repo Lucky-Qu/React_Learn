@@ -63,18 +63,28 @@ function App() {
             </div>
         )
     }
+    const [commentContent, setCommentContent] = useState("")
     function WriteComment(){
         return (
             <div>
-                <input></input>
+                <input
+                    onChange={
+                    (e) => {
+                        setCommentContent(e.target.value)
+                    }
+                }
+                    value={commentContent}
+                ></input>
                 <button onClick={
-                    () => setComments([...comments, {
+                    () => {setComments([...comments, {
                         userName: userNow.name,
                         likes: 0,
                         date: Date.now().toString(),
-                        content: "test",
+                        content: commentContent,
                         cid:"1005"
                     }])
+                    setCommentContent("")
+                    }
                 }>提交</button>
             </div>
         )
