@@ -20,6 +20,13 @@ function App() {
     const giveMePi = (pi) => {
         console.log("I Got Pi!")
     }
+    const expFunc = (num1, e) => {
+        console.log(num1)
+        console.log(e)
+    }
+    function SuperButton(){
+        return <button onClick={() => console.log("msg from Super Button!")}>I`m Super Button!!</button>
+    }
   return (
     <div className="App">
         {/*在JSX中使用{}来包裹想要执行的js表达式*/}
@@ -52,14 +59,25 @@ function App() {
         {/*对于复杂的条件渲染，可以使用函数来进行渲染，如：*/}
         {printSelectedNumber(selectNum)}
         {/*React中，绑定事件遵循on+事件名称+{调用函数}的方法*/}
-        <button onClick={() => {console.log("按钮被点击了")}}>点我</button>
+        <button onClick={() => console.log("按钮被点击了")}>点我</button>
         {/*获取事件参数只需要在函数形参声明参数即可*/}
         <button onClick={(e) => {
             console.log(e)
         }}>点我点我</button>
         {/*需要传递自定义参数的时候，事件绑定的位置改造成箭头函数的写法*/}
         {/*不能直接调用函数，要用箭头函数的写法*/}
-        <button onClick={() => {giveMePi(pi)}}>Give me Pi</button>
+        <button onClick={() => giveMePi(pi)}>Give me Pi</button>
+        {/*想要同时传递自定义参数和事件对象e时，参考以下的写法(函数见expFunc)*/}
+        <button onClick={(e) => expFunc(123, e)}>自定义参数和事件对象</button>
+        {/*组件*/}
+        {/*在React中，规定一个组件就是首字母大写的一个函数，内部存放了组件的逻辑和视图UI，渲染组件只需要把组件以标签的方式写出即可*/}
+        {/*定义了一个SuperButton组件，见上方const区域*/}
+        <hr></hr>
+        {/*渲染组件时，可以采用自闭合或成对标签的方式书写*/}
+        {/*自闭合*/}
+        <SuperButton />
+        {/*成对标签*/}
+        <SuperButton></SuperButton>
     </div>
   )
 }
