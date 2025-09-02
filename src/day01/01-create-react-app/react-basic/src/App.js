@@ -1,6 +1,7 @@
 //项目的根组件
 //app被index.js引入，渲染到public/index.html(root)
 import {useState} from "react"
+import "./style.css"
 
 function App() {
     //JSX，JSX是JavaScript和XML（HTML）的缩写，表示在js代码中编写HTML模版结构，是React中编写UI模版的方式
@@ -100,6 +101,13 @@ function App() {
             ...amazingPerson,
             age: 21
         })}>amazingPersson</button>
+        {/*对于样式来讲，React支持行内样式和引入样式，行内样式的写法如下*/}
+        {/*注意原先有短链接符的变为小驼峰，如font-size -> fontSize*/}
+        <hr></hr>
+        <h1 style={{fontSize:"40px",backgroundColor:"blueviolet"}}>示例</h1>
+        {/*通过className控制*/}
+        {/*先引入外部写好的css文件(推荐)*/}
+        <h5 className="example">OMG</h5>
     </div>
   )
 }

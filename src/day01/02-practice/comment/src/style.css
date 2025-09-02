@@ -1,0 +1,13 @@
+.App {
+    border: 1px solid black;
+    height: 800px;
+    width: 600px;
+    margin: 0 auto;
+}
+.graySmallFont {
+    color: dimgray;
+    font-size: 8px;
+}
+.bigFont {
+    font-size: 48px;
+}
