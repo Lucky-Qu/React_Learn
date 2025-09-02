@@ -1,5 +1,7 @@
 //项目的根组件
 //app被index.js引入，渲染到public/index.html(root)
+import {useState} from "react"
+
 function App() {
     //JSX，JSX是JavaScript和XML（HTML）的缩写，表示在js代码中编写HTML模版结构，是React中编写UI模版的方式
     //通过解析器将其翻译为js代码执行（BABEL)
@@ -27,6 +29,11 @@ function App() {
     function SuperButton(){
         return <button onClick={() => console.log("msg from Super Button!")}>I`m Super Button!!</button>
     }
+    const [amazingNum, setAmazingNum] = useState(0)
+    const [amazingPerson, setAmazingPerson] = useState({
+        name: "LuckyQu",
+        age: 18
+    })
   return (
     <div className="App">
         {/*在JSX中使用{}来包裹想要执行的js表达式*/}
@@ -78,6 +85,21 @@ function App() {
         <SuperButton />
         {/*成对标签*/}
         <SuperButton></SuperButton>
+        {/*useState*/}
+        {/*useState是一个React Hook（函数），他可以提供一个状态变量，从而影响渲染结果*/}
+        {/*与普通变量不同的是，状态变量发生改变时，视图中的ui组件也会跟着变化*/}
+        {/*useState是一个函数，接收的参数为状态变量的初始值*/}
+        {/*他会返回一个数组，数组中的第一个值是状态变量，第二个是一个函数，用来修改状态变量的值*/}
+        {/*见第三十二行*/}
+        {/*要使用这个函数，需要先引入，格式参考第三行*/}
+        <button onClick={() => setAmazingNum(amazingNum + 1)}>{amazingNum}</button>
+        {/*关于状态，React规定，状态应当是只读的，应当去替换他而不是修改他，直接修改他并不能引起视图更新，称作状态不可变*/}
+        {/*对于状态对象，应当用一个全新的对象来替换他，而非直接修改，如：*/}
+        <button onClick={() => setAmazingPerson({
+            //使用展开运算符，将原对象属性展开至此，然后重写age即可实现修改age
+            ...amazingPerson,
+            age: 21
+        })}>amazingPersson</button>
     </div>
   )
 }
