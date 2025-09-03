@@ -1,7 +1,13 @@
 import {useRef, useState} from "react";
+import * as React from "react";
 
 interface SonAppProps {
     msg: string
+    children?: React.ReactNode
+}
+interface PracticeSonAppProps {
+    onSendMsgToApp: (msg: string) => void
+    children?: React.ReactNode
 }
 const SonApp= (props: SonAppProps)=>{
     return (
@@ -13,13 +19,31 @@ const SonApp= (props: SonAppProps)=>{
     )
 }
 
+const PracticeSonApp = (props: PracticeSonAppProps) => {
+    const [msg, setMsg] = useState('')
+    const sendMsgToApp = (msg: string) => {
+        setMsg(msg)
+        props.onSendMsgToApp(msg)
+    }
+    return (
+        <div>
+        <input value={msg} onChange={(e)=>sendMsgToApp(e.target.value)}></input>
+        <p>输入向app传入的值</p>
+        </div>
+    )
+}
+
 function App() {
     const [inputValue, setInputValue] = useState("")
-    const inputRef = useRef(null)
+    const inputRef = useRef<HTMLInputElement | null>(null)
     const printInputRef = () =>{
         console.dir(inputRef.current)
     }
-    const msg: string = "Hello form App"
+    const [receivedMsg, setReceivedMsg] = useState("")
+    const msg: string = "Hello from App"
+    const sendMsgToApp = (msg: string) => {
+        setReceivedMsg(msg)
+    }
   return (
       <div>
           {/*表单受控绑定*/}
@@ -46,6 +70,20 @@ function App() {
           <p>2.子组件通过props参数接收数据</p>
           {/*通常来说，子组件接收参数可以为任何名，但约定俗成为props，接收到的是一个对象，对象内字段名为传入时的属性名*/}
           <SonApp msg={msg}/>
+          {/*props可传递不同类型的数据，包括但不限于数字，字符串，布尔值，数组，对象，函数，JSX*/}
+          {/*父组件的数据只能由父组件进行修改，props是只读的*/}
+          {/*特殊的props*/}
+          {/*当将文本写在子组件的标签下，子组件将会自己接收一个props，属性名为children*/}
+          <SonApp msg={""}>
+              <span>Im a span</span>
+          </SonApp>
+          <p>子传父的实现</p>
+          <p>核心要点：子组件调用父组件的函数，将想要传递的数据传入即可</p>
+          {/*约定俗成：传递函数的时候，用on来开头*/}
+          <hr />
+          <PracticeSonApp onSendMsgToApp={sendMsgToApp}></PracticeSonApp>
+          <p>这是App接收到的消息：{receivedMsg}</p>
+          <p>在兄弟组件之间的通信采取A元素传给父元素，父元素再传给B元素的方法</p>
       </div>
   )
 }
