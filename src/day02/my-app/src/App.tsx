@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {createContext, useContext, useRef, useState} from "react";
 import * as React from "react";
 
 interface SonAppProps {
@@ -30,6 +30,26 @@ const PracticeSonApp = (props: PracticeSonAppProps) => {
         <input value={msg} onChange={(e)=>sendMsgToApp(e.target.value)}></input>
         <p>输入向app传入的值</p>
         </div>
+    )
+}
+const GrandFatherMsg = createContext("")
+
+const GrandFather = () =>{
+    return (
+        <GrandFatherMsg.Provider value={"这是一条来自上两层组件的消息"}>
+            <Father />
+        </GrandFatherMsg.Provider>
+    )
+}
+const Father = () => {
+    return (
+        <Son />
+    )
+}
+const Son = () => {
+    const msg = useContext(GrandFatherMsg)
+    return (
+        <span>{msg}</span>
     )
 }
 
@@ -84,6 +104,13 @@ function App() {
           <PracticeSonApp onSendMsgToApp={sendMsgToApp}></PracticeSonApp>
           <p>这是App接收到的消息：{receivedMsg}</p>
           <p>在兄弟组件之间的通信采取A元素传给父元素，父元素再传给B元素的方法</p>
+          <hr />
+          <p>跨层传输</p>
+          <p>跨层传递需要借助context来进行传输</p>
+          <p>使用createContext来创造一个context对象，在顶层组件中使用context对象中的Provider方法来提供数据</p>
+          <p>在需要接受数据的底层组件中，使用useContext来获取</p>
+          <p>定义三个组件来演示</p>
+          <GrandFather />
       </div>
   )
 }
