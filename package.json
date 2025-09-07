@@ -6,7 +6,11 @@
   "scripts": {
     "build": "tsc"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.9.0",
+    "axios": "^1.11.0",
+    "react-redux": "^9.2.0"
+  },
   "devDependencies": {
     "typescript": "^5.5.3"
   },
