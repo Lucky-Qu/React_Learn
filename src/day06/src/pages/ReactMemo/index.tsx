@@ -1,12 +1,11 @@
 import BackToNavi from "../../components/BackToNavi/BackToNavi.tsx";
 
-const NotFound = () => {
+const ReactMemo = () => {
     return (
         <>
-            <div>访问的页面丢失啦</div>
             <BackToNavi />
         </>
     )
 }
 
-export default NotFound
+export default ReactMemo

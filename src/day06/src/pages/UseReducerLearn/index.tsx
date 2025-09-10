@@ -1,4 +1,4 @@
-import BackToNavi from "../../components/BackToNavi.tsx";
+import BackToNavi from "../../components/BackToNavi/BackToNavi.tsx";
 import {useReducer} from "react";
 
 const UseReducerLearn = () => {
